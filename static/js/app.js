@@ -20,11 +20,15 @@ function unpack(rows, index) {
 //      var otuLabels = unpack(data.samples.otu_labels, i);
 //    }
 
-    var sampleValuesArray = data.samples.map(object => object.sample_values);
+    var sampleValuesArray = data.samples.map(object => object.sample_values); 
+    for (var i = 0; i < 10; i++) {  
+      var sampleValuesArraySliced = sampleValuesArray.slice(i, 10);
 //    var sampleValues = data.samples.sample_values.slice(0, 10);
 //    var otuIds = data.samples.otu_ids.slice(0, 10);
 //    var otuLabels = data.samples.otu_labels.slice(0, 10);
     console.log(sampleValuesArray);
+    console.log(sampleValuesArraySliced);
+    }
   
   var trace1 = {
     x: otuIds,
