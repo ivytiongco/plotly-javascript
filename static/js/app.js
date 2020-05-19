@@ -6,6 +6,7 @@ function unpack(rows, index) {
 
 //function buildPlot() {
   
+  // Horizontal bar chart
   d3.json("data/samples.json").then((data) => {
     console.log(data);
  
@@ -47,16 +48,35 @@ function unpack(rows, index) {
 
     // Define the plot layout
     var layout = {
-      title: "Top 10 OTUs",
-  //    yaxis=dict(autorange="reversed")
-  //    xaxis: { title: "Organ" },
-  //    yaxis: { title: "Square Root of Survival" }
+      title: "Top 10 OTUs"  
     };
 
-    // Plot the chart to a div tag with id "plot"
+    // Plot the chart to a div tag with id "bar"
     Plotly.newPlot("bar", data, layout);  
 
-    });
-//}
 
+    // Bubble chart
+    var trace2 = {
+      x: otuIds[0],
+      y: sampleValuesArray[0],
+      text: otuLabels[0],
+      mode: 'markers',
+      marker: {
+        size: sampleValuesArray[0],
+        color: otuIds[0]
+      }
+    };
+    
+    var data2 = [trace2];
+    
+    var layout2 = {
+      title: 'Marker Size',
+      showlegend: false
+  //    height: 600,
+  //    width: 600
+    };
+    
+    Plotly.newPlot('bubble', data2, layout2);
+
+});
 //buildPlot();
