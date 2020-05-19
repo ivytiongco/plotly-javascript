@@ -4,17 +4,25 @@ function unpack(rows, index) {
   });
 }
 
-
-function buildPlot() {
+//function buildPlot() {
   
-  d3.json("/data/samples.json").then((data) => {
+  d3.json("data/samples.json").then((data) => {
     console.log(data);
 
-    for (var i = 0; i < 10; i++) {
-      var sampleValues = unpack(data.samples.sample_values, i);
-      var otuIds = unpack(data.samples.otu_ids, i);
-      var otuLabels = unpack(data.samples.otu_labels, i);
-    }
+    // Promise Pending
+//    const dataPromise = d3.json("data/samples.json");
+//    console.log("Data Promise: ", dataPromise);
+
+
+//    for (var i = 0; i < 10; i++) {
+//      var sampleValues = unpack(data.samples.sample_values, i);
+//      var otuIds = unpack(data.samples.otu_ids, i);
+//      var otuLabels = unpack(data.samples.otu_labels, i);
+//    }
+
+    var sampleValues = data.samples.sample_values;
+    var otuIds = data.samples.otu_ids;
+    var otuLabels = data.samples.otu_labels;
     console.log(sampleValues);
   
   var trace1 = {
@@ -38,6 +46,6 @@ function buildPlot() {
   Plotly.newPlot("bar", data, layout);  
 
   });
-}
+//}
 
-buildPlot();
+//buildPlot();
