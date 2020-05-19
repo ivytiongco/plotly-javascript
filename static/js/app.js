@@ -45,12 +45,12 @@ function unpack(rows, index) {
     console.log("otuLabels940Sliced: ", otuLabels940Sliced);
     
     var otuIds940SlicedString = otuIds940Sliced.map(String);
-    console.log("otuIds940SlicedString: ", otuIds940SlicedString)
+//    console.log("otuIds940SlicedString: ", otuIds940SlicedString)
 
-    var otuIds940SlicedLabels = otuIds940SlicedString.forEach(function(element, index) {
+    otuIds940SlicedString.forEach(function(element, index) {
       otuIds940SlicedString[index] = 'OTU ' + element;
     });
-    console.log("otuIds940SlicedLabels: ", otuIds940SlicedLabels);
+    console.log("otuIds940SlicedString: ", otuIds940SlicedString)
 
     // Sort the array in descending order    
   //  var sampleValues940SlicedSorted = sampleValues940Sliced.sort(function compareFunction(firstNum, secondNum) {
@@ -62,12 +62,12 @@ function unpack(rows, index) {
 
     // Reverse the array to accommodate Plotly's defaults
     reversedSampleValues940Sliced = sampleValues940Sliced.reverse();
-    reversedOtuIds940SlicedLabels = otuIds940SlicedLabels.reverse();
+    reversedOtuIds940SlicedString = otuIds940SlicedString.reverse();
 
 
     var trace1 = {
       x: reversedSampleValues940Sliced,
-      y: otuIds940SlicedLabels,
+      y: reversedOtuIds940SlicedString,
   //    text: otuLabels940Sliced,
       name: "OTUs",
       type: "bar",    
