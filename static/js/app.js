@@ -71,9 +71,12 @@ function unpack(rows, index) {
     
     var layout2 = {
   //    title: 'Marker Size',
-      showlegend: false
-  //    height: 600,
-  //    width: 600
+      xaxis: {
+        title: {
+          text: "OTU ID"
+        }
+      },
+      showlegend: false  
     };
     
     Plotly.newPlot('bubble', data2, layout2);
