@@ -1,17 +1,24 @@
-d3.json("data/samples.json").then(function(data) {
-  console.log(data);
+function unpack(rows, index) {
+  return rows.map(function(row) {
+    return row[index];
+  });
+}
 
-  // we need first 10 sample values, but NEED TO CHANGE 0-9 TO CORRECT THING
-  var sampleValues = data.samples.sample_values.map(row => row[0-9]);
+
+function buildPlot() {
+  
+  d3.json("/data/samples.json").then((data) => {
+    console.log(data);
+
+    for (var i = 0; i < 10; i++) {
+      var sampleValues = unpack(data.samples.sample_values, i);
+      var otuIds = unpack(data.samples.otu_ids, i);
+      var otuLabels = unpack(data.samples.otu_labels, i);
+    }
     console.log(sampleValues);
-
-  var otu = data.samples.sample_values.map(row => row[0-9]);
-    console.log(otu);
-
-
-  //  Create the Traces
+  
   var trace1 = {
-    x: data.samples.otu_ids,
+    x: otuIds,
     y: sampleValues,
     type: "bar",    
     orientation: "h"
@@ -28,5 +35,9 @@ d3.json("data/samples.json").then(function(data) {
   };
 
   // Plot the chart to a div tag with id "plot"
-  Plotly.newPlot("bar", data, layout);
-});
+  Plotly.newPlot("bar", data, layout);  
+
+  });
+}
+
+buildPlot();
