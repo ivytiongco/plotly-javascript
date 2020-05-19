@@ -70,7 +70,7 @@ function unpack(rows, index) {
     var data2 = [trace2];
     
     var layout2 = {
-      title: 'Marker Size',
+  //    title: 'Marker Size',
       showlegend: false
   //    height: 600,
   //    width: 600
