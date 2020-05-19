@@ -81,5 +81,10 @@ function unpack(rows, index) {
     
     Plotly.newPlot('bubble', data2, layout2);
 
+    // Demographic Info panel
+    var metadataArray = data.metadata;
+    console.log("metadataArray: ", metadataArray)
+
+
 });
 //buildPlot();
