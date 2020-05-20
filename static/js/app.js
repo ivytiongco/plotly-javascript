@@ -1,8 +1,8 @@
-function unpack(rows, index) {
-  return rows.map(function(row) {
-    return row[index];
-  });
-}
+//function unpack(rows, index) {
+//  return rows.map(function(row) {
+//    return row[index];
+//  });
+//}
 
 //function buildPlot() {
   
@@ -12,7 +12,11 @@ function unpack(rows, index) {
  
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
     var otuIds = data.samples.map(object => object.otu_ids); 
-    var otuLabels = data.samples.map(object => object.otu_labels);     
+    var otuLabels = data.samples.map(object => object.otu_labels);    
+    
+    var metadata940 = data.metadata[0];
+    console.log("metadata940: ", metadata940);
+
 
     var sampleValues940Sliced = sampleValuesArray[0].slice(0, 10);
     var otuIds940Sliced = otuIds[0].slice(0, 10);
@@ -81,9 +85,17 @@ function unpack(rows, index) {
     
     Plotly.newPlot('bubble', data2, layout2);
 
-    // Demographic Info panel
-    var metadataArray = data.metadata;
-    console.log("metadataArray: ", metadataArray)
+    // Demographic Info panel - HOW TO INSERT KEY, VALUE PAIRS????
+    var panel = d3.select("#sample-metadata");
+    metadata940.forEach((d) => {
+      Object.entries(d).forEach(([key, value]) => {
+        var cell = panel.append();
+        cell.text(key, value);
+      });
+    });
+
+
+  
 
 
 });
