@@ -6,17 +6,33 @@
 
 //function buildPlot() {
   
-  // Horizontal bar chart
+  // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
- 
+
+    // Demographic Info panel - HOW TO INSERT KEY, VALUE PAIRS????
+    var metadata940 = data.metadata[0];
+    console.log("metadata940: ", metadata940);
+    
+//    var selection = d3.select(".panel-body")
+//      .data(metadata940)
+//      .enter()
+//      .append("div");
+
+    d3.select('.panel-body')
+      .selectAll('span')
+      .data(metadata940)
+      .enter()
+      .append('span')
+      .text(function(d){
+        return d;
+      })
+      .append('br');
+
+    // Horizontal bar chart 
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
     var otuIds = data.samples.map(object => object.otu_ids); 
     var otuLabels = data.samples.map(object => object.otu_labels);    
-    
-    var metadata940 = data.metadata[0];
-    console.log("metadata940: ", metadata940);
-
 
     var sampleValues940Sliced = sampleValuesArray[0].slice(0, 10);
     var otuIds940Sliced = otuIds[0].slice(0, 10);
@@ -85,14 +101,7 @@
     
     Plotly.newPlot('bubble', data2, layout2);
 
-    // Demographic Info panel - HOW TO INSERT KEY, VALUE PAIRS????
-    var panel = d3.select("#sample-metadata");
-    metadata940.forEach((d) => {
-      Object.entries(d).forEach(([key, value]) => {
-        var cell = panel.append();
-        cell.text(key, value);
-      });
-    });
+    
 
 
   
