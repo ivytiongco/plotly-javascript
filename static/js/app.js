@@ -15,11 +15,13 @@
 //    var metadata940 = Object.entries(data.metadata[0]);
     console.log("metadata940: ", metadata940);
 
-    for (let [key, value] of Object.entries(metadata940)) {
-      var metadata940Entries = `${key}: ${value}`;
-      console.log(`${key}: ${value}`);      
-    }
+    var metadata940Entries = []
 
+    for (let [key, value] of Object.entries(metadata940)) {
+      metadata940Entries.push(`${key}: ${value}`);
+//      console.log(`${key}: ${value}`);      
+    }
+    
     console.log("metadata940Entries: ", metadata940Entries);
 
 //    var metadata940entries = 
@@ -32,10 +34,10 @@
     var ul = d3.select(".panel-body").append("ul");
 
     var selection = ul.selectAll("li") // creates virtual selection
-      .data([metadata940Entries]) // binds data
+      .data(metadata940Entries) // binds data
       .enter()
       .append("li") // appends li element for each item in array (since there are currently none)
-      .attr("style", "list-style-type: none")
+      .attr("style", "list-style: none")
       .text(function(d) {
         return d;
       }); // sets the text of each element to match the items in array
