@@ -12,22 +12,36 @@
 
     // Demographic Info panel - HOW TO INSERT KEY, VALUE PAIRS????
     var metadata940 = data.metadata[0];
+//    var metadata940 = Object.entries(data.metadata[0]);
     console.log("metadata940: ", metadata940);
+
+    for (let [key, value] of Object.entries(metadata940)) {
+      var metadata940Entries = `${key}: ${value}`;
+      console.log(`${key}: ${value}`);      
+    }
+
+    console.log("metadata940Entries: ", metadata940Entries);
+
+//    var metadata940entries = 
     
 //    var selection = d3.select(".panel-body")
 //      .data(metadata940)
 //      .enter()
 //      .append("div");
 
-    d3.select('.panel-body')
-      .selectAll('span')
-      .data(metadata940)
+    var ul = d3.select(".panel-body").append("ul");
+
+    var selection = ul.selectAll("li") // creates virtual selection
+      .data([metadata940Entries]) // binds data
       .enter()
-      .append('span')
-      .text(function(d){
+      .append("li") // appends li element for each item in array (since there are currently none)
+      .attr("style", "list-style-type: none")
+      .text(function(d) {
         return d;
-      })
-      .append('br');
+      }); // sets the text of each element to match the items in array
+
+
+
 
     // Horizontal bar chart 
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
