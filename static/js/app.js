@@ -1,36 +1,34 @@
-//function unpack(rows, index) {
-//  return rows.map(function(row) {
-//    return row[index];
-//  });
-//}
-
 //function buildPlot() {
+
+// Call updatePlotly() when a change takes place to the DOM
+//d3.selectAll("#selDataset").on("change", updatePlotly);
+
+// This function is called when a dropdown menu item is selected
+//function updatePlotly() {
+  // Use D3 to select the dropdown menu
+//  var dropdownMenu = d3.select("#selDataset").node();
+  // Assign the value of the dropdown menu option to a variable
+//  var dataset = dropdownMenu.property("value");
+
   
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
 
-    // Demographic Info panel - HOW TO INSERT KEY, VALUE PAIRS????
+    // Demographic Info panel
     var metadata940 = data.metadata[0];
-//    var metadata940 = Object.entries(data.metadata[0]);
     console.log("metadata940: ", metadata940);
 
+    // Create empty array to later hold metadata objects
     var metadata940Entries = []
 
+    // Add key-value text to empty array
     for (let [key, value] of Object.entries(metadata940)) {
       metadata940Entries.push(`${key}: ${value}`);
-//      console.log(`${key}: ${value}`);      
-    }
-    
+    }    
     console.log("metadata940Entries: ", metadata940Entries);
 
-//    var metadata940entries = 
-    
-//    var selection = d3.select(".panel-body")
-//      .data(metadata940)
-//      .enter()
-//      .append("div");
-
+    // Add list of metadata to panel
     var ul = d3.select(".panel-body").append("ul");
 
     var selection = ul.selectAll("li") // creates virtual selection
@@ -38,18 +36,19 @@
       .enter()
       .append("li") // appends li element for each item in array (since there are currently none)
       .attr("style", "list-style: none")
+      .style("font-weight", 700)
       .text(function(d) {
         return d;
       }); // sets the text of each element to match the items in array
 
-
-
-
     // Horizontal bar chart 
+
+    // Get all sample values into one array, same for OTU IDs and OTU Labels
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
     var otuIds = data.samples.map(object => object.otu_ids); 
     var otuLabels = data.samples.map(object => object.otu_labels);    
 
+    // Since sample values are already in descending order, slice to get first 10 values
     var sampleValues940Sliced = sampleValuesArray[0].slice(0, 10);
     var otuIds940Sliced = otuIds[0].slice(0, 10);
     var otuLabels940Sliced = otuLabels[0].slice(0, 10);
@@ -57,8 +56,9 @@
     console.log("otuIds940Sliced: ", otuIds940Sliced);
     console.log("otuLabels940Sliced: ", otuLabels940Sliced);
     
+    // Convert OTU IDs to string and add OTU before each one
     var otuIds940SlicedString = otuIds940Sliced.map(String);
-//    console.log("otuIds940SlicedString: ", otuIds940SlicedString)
+    console.log("otuIds940SlicedString: ", otuIds940SlicedString)
 
     otuIds940SlicedString.forEach(function(element, index) {
       otuIds940SlicedString[index] = 'OTU ' + element;
@@ -70,6 +70,7 @@
     reversedOtuIds940SlicedString = otuIds940SlicedString.reverse();
     reversedOtuLabels940Sliced = otuLabels940Sliced.reverse();
 
+    // Create trace
     var trace1 = {
       x: reversedSampleValues940Sliced,
       y: reversedOtuIds940SlicedString,
@@ -117,11 +118,7 @@
     
     Plotly.newPlot('bubble', data2, layout2);
 
-    
+  });
 
-
-  
-
-
-});
+//}
 //buildPlot();
