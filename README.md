@@ -15,3 +15,5 @@ Display the sample metadata, i.e., an individual's demographic information. Disp
 Update all of the plots any time that a new sample is selected.
 
 ## Dashboard Screenshot
+
+![](screenshot_of_dashboard.png)
