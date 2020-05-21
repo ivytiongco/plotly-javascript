@@ -1,14 +1,14 @@
 //function buildPlot() {
 
 // Call updatePlotly() when a change takes place to the DOM
-//d3.selectAll("#selDataset").on("change", updatePlotly);
+d3.selectAll("#selDataset").on("change", updatePlotly);
 
 // This function is called when a dropdown menu item is selected
-//function updatePlotly() {
+function updatePlotly() {
   // Use D3 to select the dropdown menu
-//  var dropdownMenu = d3.select("#selDataset").node();
+  var dropdownMenu = d3.select("#selDataset").node();
   // Assign the value of the dropdown menu option to a variable
-//  var dataset = dropdownMenu.property("value");
+  var dataset = dropdownMenu.property("value");
 
   
   // Load data
@@ -37,6 +37,8 @@
       .append("li") // appends li element for each item in array (since there are currently none)
       .attr("style", "list-style: none")
       .style("font-weight", 700)
+//      .attr("padding", 0)
+//      .attr("margin", 0)
       .text(function(d) {
         return d;
       }); // sets the text of each element to match the items in array
