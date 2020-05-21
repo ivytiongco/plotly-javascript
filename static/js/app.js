@@ -1,20 +1,15 @@
-//function buildPlot() {
-
-// Call updatePlotly() when a change takes place to the DOM
-d3.selectAll("#selDataset").on("change", updatePlotly);
-
-// This function is called when a dropdown menu item is selected
-function updatePlotly() {
-  // Use D3 to select the dropdown menu
-  var dropdownMenu = d3.select("#selDataset").node();
-  // Assign the value of the dropdown menu option to a variable
-  var dataset = dropdownMenu.property("value");
-
-  
+// Initializes the page with a default plot
+function init() {
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
 
+    // IF/WHEN TO USE THIS??? HOW TO PUT VALUES IN DROPDOWN???
+    // Create array of Subject IDs to use for dropdown menu
+    var subjectID = data.names;
+    console.log("subjectID: ", subjectID);
+
+    
     // Demographic Info panel
     var metadata940 = data.metadata[0];
     console.log("metadata940: ", metadata940);
@@ -37,8 +32,6 @@ function updatePlotly() {
       .append("li") // appends li element for each item in array (since there are currently none)
       .attr("style", "list-style: none")
       .style("font-weight", 700)
-//      .attr("padding", 0)
-//      .attr("margin", 0)
       .text(function(d) {
         return d;
       }); // sets the text of each element to match the items in array
@@ -121,6 +114,31 @@ function updatePlotly() {
     Plotly.newPlot('bubble', data2, layout2);
 
   });
+}
 
-//}
-//buildPlot();
+
+
+
+// Call updatePlotly() when a change takes place to the DOM
+d3.selectAll("#selDataset").on("change", updatePlotly);
+
+// This function is called when a dropdown menu item is selected
+function updatePlotly() {
+  // Use D3 to select the dropdown menu
+  var dropdownMenu = d3.select("#selDataset");
+  // Assign the value of the dropdown menu option to a variable
+  var dataset = dropdownMenu.node().value;  
+
+  if (dataset === '940') {
+      x = [1, 2, 3, 4, 5];
+      y = [1, 2, 4, 8, 16];
+    }
+  
+  // Note the extra brackets around 'x' and 'y'
+  Plotly.restyle("bar", "x", [x]);
+  Plotly.restyle("bubble", "y", [y]);
+  Plotly.restyle("bubble", "y", [y]);
+}
+
+
+init();
