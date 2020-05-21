@@ -1,3 +1,22 @@
+// Add Subject IDs to dropdown menu
+d3.json("data/samples.json").then((data) => {
+
+  var subjectID = data.names;
+  console.log("subjectID: ", subjectID);
+
+  // Add list of metadata to panel
+  var ul = d3.select("#selDataset");
+
+  var selection = ul.selectAll("li") // creates virtual selection
+    .data(subjectID) // binds data
+    .enter()
+    .append("option") // appends li element for each item in array (since there are currently none)
+//    .value()
+    .text(function(d) {
+      return d;
+    }); // sets the text of each element to match the items in array
+  });
+
 // Initializes the page with a default plot
 function init() {
   // Load data
@@ -5,6 +24,9 @@ function init() {
     console.log(data);
 
     // IF/WHEN TO USE THIS??? HOW TO PUT VALUES IN DROPDOWN???
+    // DO WE NEED TO USE FUNCTION optionChanged FROM INDEX.HTML SOMEHOW?
+    // https://www.w3schools.com/tags/ev_onchange.asp
+    // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_ev_onchange2
     // Create array of Subject IDs to use for dropdown menu
     var subjectID = data.names;
     console.log("subjectID: ", subjectID);
@@ -118,7 +140,6 @@ function init() {
 
 
 
-
 // Call updatePlotly() when a change takes place to the DOM
 d3.selectAll("#selDataset").on("change", updatePlotly);
 
@@ -129,15 +150,15 @@ function updatePlotly() {
   // Assign the value of the dropdown menu option to a variable
   var dataset = dropdownMenu.node().value;  
 
-  if (dataset === '940') {
-      x = [1, 2, 3, 4, 5];
-      y = [1, 2, 4, 8, 16];
-    }
+//  if (dataset === '940') {
+//      x = [1, 2, 3, 4, 5];
+//      y = [1, 2, 4, 8, 16];
+//    }
   
   // Note the extra brackets around 'x' and 'y'
-  Plotly.restyle("bar", "x", [x]);
-  Plotly.restyle("bubble", "y", [y]);
-  Plotly.restyle("bubble", "y", [y]);
+//  Plotly.restyle("bar", "x", [x]);
+//  Plotly.restyle("bubble", "y", [y]);
+//  Plotly.restyle("bubble", "y", [y]);
 }
 
 
