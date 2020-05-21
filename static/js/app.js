@@ -5,33 +5,23 @@ d3.json("data/samples.json").then((data) => {
   console.log("subjectID: ", subjectID);
 
   // Add list of metadata to panel
-  var ul = d3.select("#selDataset");
+  var dropdown = d3.select("#selDataset");
 
-  var selection = ul.selectAll("li") // creates virtual selection
+  var selection = dropdown.selectAll("option") // creates virtual selection
     .data(subjectID) // binds data
     .enter()
     .append("option") // appends li element for each item in array (since there are currently none)
-//    .value()
     .text(function(d) {
       return d;
     }); // sets the text of each element to match the items in array
   });
 
-// Initializes the page with a default plot
+// Initializes the page with default plots for Subject 940
 function init() {
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
 
-    // IF/WHEN TO USE THIS??? HOW TO PUT VALUES IN DROPDOWN???
-    // DO WE NEED TO USE FUNCTION optionChanged FROM INDEX.HTML SOMEHOW?
-    // https://www.w3schools.com/tags/ev_onchange.asp
-    // https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_ev_onchange2
-    // Create array of Subject IDs to use for dropdown menu
-    var subjectID = data.names;
-    console.log("subjectID: ", subjectID);
-
-    
     // Demographic Info panel
     var metadata940 = data.metadata[0];
     console.log("metadata940: ", metadata940);
@@ -124,7 +114,6 @@ function init() {
     var data2 = [trace2];
     
     var layout2 = {
-  //    title: 'Marker Size',
       xaxis: {
         title: {
           text: "OTU ID"
@@ -149,6 +138,12 @@ function updatePlotly() {
   var dropdownMenu = d3.select("#selDataset");
   // Assign the value of the dropdown menu option to a variable
   var dataset = dropdownMenu.node().value;  
+
+// HOW TO USE EACH SUBJECT'S DATA??? 
+// FOR EACH USING i AND COPY CODE FOR ALL PLOTS?
+// USE SWITCH OR JUST IF STATEMENTS?
+// https://ucsd.bootcampcontent.com/UCSD-Coding-Bootcamp/ucsd-sd-data-pt-01-2020-u-c/blob/master/01-Lesson-Plans/15-Interactive-Visualizations-and-Dashboards/3/Activities/02-Stu_Switch/Solved/plots.js
+// https://ucsd.bootcampcontent.com/UCSD-Coding-Bootcamp/ucsd-sd-data-pt-01-2020-u-c/blob/master/01-Lesson-Plans/15-Interactive-Visualizations-and-Dashboards/2/Activities/08-Ins_Dropdown_Events/Solved/plots.js
 
 //  if (dataset === '940') {
 //      x = [1, 2, 3, 4, 5];
