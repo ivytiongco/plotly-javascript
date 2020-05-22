@@ -14,6 +14,13 @@ https://ivytiongco.github.io/plotly-microbe-analysis/
 * Display the sample metadata, i.e., an individual's demographic information. Display each key-value pair from the metadata JSON object somewhere on the page.
 * Update all of the plots any time that a new sample is selected.
 
-## Dashboard Screenshot
+## Dashboard Screenshots
 
-![](screenshot/screenshot_of_dashboard.png)
+Initial dashboard loaded with Subject 940 data
+
+![](screenshots/screenshot_of_dashboard.png)
+
+Dashboard loaded with Subject 948 data
+
+![](screenshots/screenshot948.png)
+
