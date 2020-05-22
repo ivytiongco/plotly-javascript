@@ -18,7 +18,7 @@ https://ivytiongco.github.io/plotly-microbe-analysis/
 
 Initial dashboard loaded with Subject 940 data
 
-![](screenshots/screenshot_of_dashboard.png)
+![](screenshots/screenshot940.png)
 
 Dashboard loaded with Subject 948 data
 
