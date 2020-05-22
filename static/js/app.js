@@ -20,11 +20,11 @@ function init() {
         return d;
       }); // sets the text of each element to match the items in array
     
-    getMetadata(0);
+    getMetadata(940);
 
-    barChart(0)
+    barChart(940)
 
-    bubbleChart(0)
+    bubbleChart(940)
   });
 }
 
@@ -60,23 +60,34 @@ function getMetadata(i) {
     console.log(data);
 
     // Demographic Info panel
+    var demoKeys = Object.keys(data.metadata[index]);
+    var demoValues = Object.values(data.metadata[index])
+    var demographicData = d3.select('#sample-metadata');
+
+    // clear demographic data
+    demographicData.html("");
+    
+    for (var i = 0; i < demoKeys.length; i++) {
+      demographicData.append("p").text(`${demoKeys[i]}: ${demoValues[i]}`);
+    };
+    
   //  var metadata = data.metadata[0];
-    var metadata = data.metadata[data.metadata.findIndex(m => m.id === i)];
-    console.log("data.metadata.findIndex(m => m.id === i): ", data.metadata.findIndex(m => m.id === i));
-    console.log("metadata: ", metadata);
+  //  var metadata = data.metadata[data.metadata.findIndex(m => m.id === i)];
+  //  console.log("data.metadata.findIndex(m => m.id === i): ", data.metadata.findIndex(m => m.id === i));
+  //  console.log("metadata: ", metadata);
 
-    var ul = d3.select(".panel-body").append("ul");
+  //  var ul = d3.select(".panel-body").append("ul");
 
-    var selection = ul.selectAll("li") // creates virtual selection
-      .data(metadata) // binds data
-      .enter()
-      .append("li") // appends li element for each item in array (since there are currently none)
-      .attr("style", "list-style: none")
-      .style("font-weight", 700)
-      .text(function(d) {
-        return d;
-      }); // sets the text of each element to match the items in array
-  });
+  //  var selection = ul.selectAll("li") // creates virtual selection
+  //    .data(metadata) // binds data
+  //    .enter()
+  //    .append("li") // appends li element for each item in array (since there are currently none)
+  //    .attr("style", "list-style: none")
+  //    .style("font-weight", 700)
+  //    .text(function(d) {
+  //      return d;
+  //    }); // sets the text of each element to match the items in array
+//  });
 }
 
 
@@ -87,6 +98,10 @@ function barChart(i) {
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
+
+    // Find index by id
+    var index = data.samples.findIndex(m => m.id === i);
+    console.log("********** bar chart index: ", index);
     
     // Get all sample values into one array, same for OTU IDs and OTU Labels
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
@@ -97,9 +112,9 @@ function barChart(i) {
     console.log("otuLabels: ", otuLabels);
 
     // Since sample values are already in descending order, slice to get first 10 values
-    var sampleValuesSliced = sampleValuesArray[i].slice(0, 10);
-    var otuIdsSliced = otuIds[i].slice(0, 10);
-    var otuLabelsSliced = otuLabels[i].slice(0, 10);
+    var sampleValuesSliced = sampleValuesArray[index].slice(0, 10);
+    var otuIdsSliced = otuIds[index].slice(0, 10);
+    var otuLabelsSliced = otuLabels[index].slice(0, 10);
     console.log("sampleValuesSliced: ", sampleValuesSliced);
     console.log("otuIdsSliced: ", otuIdsSliced);
     console.log("otuLabelsSliced: ", otuLabelsSliced);
@@ -147,19 +162,23 @@ function bubbleChart(i) {
   d3.json("data/samples.json").then((data) => {
     console.log(data);
 
+    // Find index by id
+    var index = data.samples.findIndex(m => m.id === i);
+    console.log("********** bubble chart index: ", index);
+
     // Get all sample values into one array, same for OTU IDs and OTU Labels
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
     var otuIds = data.samples.map(object => object.otu_ids); 
     var otuLabels = data.samples.map(object => object.otu_labels);   
 
     var trace2 = {
-      x: otuIds[i],
-      y: sampleValuesArray[i],
-      text: otuLabels[i],
+      x: otuIds[index],
+      y: sampleValuesArray[index],
+      text: otuLabels[index],
       mode: 'markers',
       marker: {
-        size: sampleValuesArray[i],
-        color: otuIds[i]
+        size: sampleValuesArray[index],
+        color: otuIds[index]
       }
     };
 
