@@ -20,7 +20,7 @@ function init() {
         return d;
       }); // sets the text of each element to match the items in array
     
-    getMetadata(0);
+    getMetadata(940);
 
     barChart(940)
 
@@ -52,25 +52,29 @@ function optionChanged() {
 }  
 
 // Demographic Info panel displaying metadata
-function getMetadata(index) {
-//  console.log("******* getMetadata i: ", i);  
+function getMetadata(i) {
+  console.log("******* getMetadata i: ", i);  
 
   // Load data
   d3.json("data/samples.json").then((data) => {
-    console.log(data);
+    console.log(data);  
+
+    // Metadata object of chosen subject
+    var metadataObject = data.metadata[data.metadata.findIndex(m => m.id === i)];
+    console.log("*********** metadataObject: ", metadataObject);
   
     // Populate Demographic Data card
-    var demoKeys = Object.keys(data.metadata[index]);
+    var demoKeys = Object.keys(metadataObject);
     console.log("demoKeys: ", demoKeys);
 
-    var demoValues = Object.values(data.metadata[index])
+    var demoValues = Object.values(metadataObject)
     var demographicData = d3.select('#sample-metadata');
 
     // clear demographic data
     demographicData.html("");
 
-    for (var i = 0; i < demoKeys.length; i++) {
-      demographicData.append("p").text(`${demoKeys[i]}: ${demoValues[i]}`);
+    for (var j = 0; j < demoKeys.length; j++) {
+      demographicData.append("p").text(`${demoKeys[j]}: ${demoValues[j]}`);
     };
   });    
 }
