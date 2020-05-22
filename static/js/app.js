@@ -49,12 +49,11 @@ function optionChanged() {
   barChart(parseInt(dataset));
 
   bubbleChart(parseInt(dataset));
-
 }  
 
-// Function to get metadata
+// Demographic Info panel displaying metadata
 function getMetadata(i) {
-  console.log("*******i: ", i);
+  console.log("******* getMetadata i: ", i);
 
   // Load data
   d3.json("data/samples.json").then((data) => {
@@ -62,6 +61,7 @@ function getMetadata(i) {
 
     // Demographic Info panel
     var metadata = data.metadata[data.metadata.findIndex(m => m.id === i)];
+    console.log("data.metadata.findIndex(m => m.id === i): ", data.metadata.findIndex(m => m.id === i));
     console.log("metadata: ", metadata);
 
     var ul = d3.select(".panel-body").append("ul");
@@ -81,6 +81,8 @@ function getMetadata(i) {
 
 // Horizontal bar chart 
 function barChart(i) {
+  console.log("********* barChart i: ", i);
+
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
@@ -89,6 +91,9 @@ function barChart(i) {
     var sampleValuesArray = data.samples.map(object => object.sample_values); 
     var otuIds = data.samples.map(object => object.otu_ids); 
     var otuLabels = data.samples.map(object => object.otu_labels);    
+    console.log("sampleValuesArray: ", sampleValuesArray);
+    console.log("otuIds: ", otuIds);
+    console.log("otuLabels: ", otuLabels);
 
     // Since sample values are already in descending order, slice to get first 10 values
     var sampleValuesSliced = sampleValuesArray[i].slice(0, 10);
