@@ -52,12 +52,30 @@ function optionChanged() {
 }  
 
 // Demographic Info panel displaying metadata
-function getMetadata() {
-//  console.log("******* getMetadata i: ", i);
+function getMetadata(index) {
+//  console.log("******* getMetadata i: ", i);  
 
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
+
+    // Find index by id
+  //  var index = data.samples.findIndex(m => m.id == i);
+  //  console.log("********** metadata index: ", index);
+
+    // Populate Demographic Data card
+    var demoKeys = Object.keys(data.metadata[index]);
+    console.log("demoKeys: ", demoKeys);
+
+    var demoValues = Object.values(data.metadata[index])
+    var demographicData = d3.select('#sample-metadata');
+    // clear demographic data
+    demographicData.html("");
+    for (var i = 0; i < demoKeys.length; i++) {
+      demographicData.append("p").text(`${demoKeys[i]}: ${demoValues[i]}`);
+    };
+  });    
+}
 
     // Find index by id
   //  var index = data.samples.findIndex(m => m.id == i);
@@ -76,20 +94,19 @@ function getMetadata() {
   //  console.log("demoPanel: ", demoPanel)
 
     // Use d3 to select the panel with id of `#sample-metadata`
-    var sample_metadata = d3.select("#sample-metadata");
+  //  var sample_metadata = d3.select("#sample-metadata");
 
     // Use `.html("") to clear any existing metadata
-    sample_metadata.html("");
+  //  sample_metadata.html("");
 
     // Use `Object.entries` to add each key and value pair to the panel
     // Hint: Inside the loop, you will need to use d3 to append new
     // tags for each key-value in the metadata.
-    Object.entries(i).forEach(function ([key, value]) {
-      var row = sample_metadata.append("p");
-      row.text(`${key}: ${value}`);
-    });    
-  });
-}
+  //  Object.entries(i).forEach(function ([key, value]) {
+  //    var row = sample_metadata.append("p");
+  //    row.text(`${key}: ${value}`);
+
+
 
     
 
