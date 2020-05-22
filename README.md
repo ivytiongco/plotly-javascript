@@ -16,4 +16,4 @@ https://ivytiongco.github.io/plotly-microbe-analysis/
 
 ## Dashboard Screenshot
 
-![](screenshot_of_dashboard.png)
+![](screenshot/screenshot_of_dashboard.png)
