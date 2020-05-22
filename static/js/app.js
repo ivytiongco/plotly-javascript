@@ -60,6 +60,7 @@ function getMetadata(i) {
     console.log(data);
 
     // Demographic Info panel
+  //  var metadata = data.metadata[0];
     var metadata = data.metadata[data.metadata.findIndex(m => m.id === i)];
     console.log("data.metadata.findIndex(m => m.id === i): ", data.metadata.findIndex(m => m.id === i));
     console.log("metadata: ", metadata);
