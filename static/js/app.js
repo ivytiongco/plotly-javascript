@@ -20,7 +20,7 @@ function init() {
         return d;
       }); // sets the text of each element to match the items in array
     
-    getMetadata(940);
+    getMetadata(0);
 
     barChart(940)
 
@@ -52,31 +52,64 @@ function optionChanged() {
 }  
 
 // Demographic Info panel displaying metadata
-function getMetadata(i) {
-  console.log("******* getMetadata i: ", i);
+function getMetadata() {
+//  console.log("******* getMetadata i: ", i);
 
   // Load data
   d3.json("data/samples.json").then((data) => {
     console.log(data);
 
-    // Demographic Info panel
-    var demoKeys = Object.keys(data.metadata[index]);
-    var demoValues = Object.values(data.metadata[index])
-    var demographicData = d3.select('#sample-metadata');
+    // Find index by id
+  //  var index = data.samples.findIndex(m => m.id == i);
+  //  console.log("********** metadata index: ", index);
 
-    // clear demographic data
-    demographicData.html("");
-    
-    for (var i = 0; i < demoKeys.length; i++) {
-      demographicData.append("p").text(`${demoKeys[i]}: ${demoValues[i]}`);
-    };
-    
-  //  var metadata = data.metadata[0];
+    // Demographic Info panel
   //  var metadata = data.metadata[data.metadata.findIndex(m => m.id === i)];
   //  console.log("data.metadata.findIndex(m => m.id === i): ", data.metadata.findIndex(m => m.id === i));
-  //  console.log("metadata: ", metadata);
+  //  console.log("***********metadata: ", metadata);
 
-  //  var ul = d3.select(".panel-body").append("ul");
+  //  var demoPanel = d3.select("#sample-metadata")
+  //    .data(metadata)
+  //    .append("p")
+  //    .text(metadata); 
+
+  //  console.log("demoPanel: ", demoPanel)
+
+    // Use d3 to select the panel with id of `#sample-metadata`
+    var sample_metadata = d3.select("#sample-metadata");
+
+    // Use `.html("") to clear any existing metadata
+    sample_metadata.html("");
+
+    // Use `Object.entries` to add each key and value pair to the panel
+    // Hint: Inside the loop, you will need to use d3 to append new
+    // tags for each key-value in the metadata.
+    Object.entries(i).forEach(function ([key, value]) {
+      var row = sample_metadata.append("p");
+      row.text(`${key}: ${value}`);
+    });    
+  });
+}
+
+    
+
+    // clear demographic data
+  //  demographicData.html("");
+    
+  //  var demoPanel = d3.select('#sample-metadata');
+
+  //  for (var i = 0; i < metadata.length; i++) {
+  //    demoPanel.append("p").text(`${metadata[i]}`);
+  //    console.log("demoPanel: ", demoPanel)
+  //  };   
+
+  //  var demoPanel = d3.select("#sample-metadata")
+    //  .data(metadata)
+  //    .append("p")
+  //    .text(function(d) {
+  //      return Object.entries(d);     
+  //    });
+
 
   //  var selection = ul.selectAll("li") // creates virtual selection
   //    .data(metadata) // binds data
@@ -88,7 +121,7 @@ function getMetadata(i) {
   //      return d;
   //    }); // sets the text of each element to match the items in array
 //  });
-}
+
 
 
 // Horizontal bar chart 
@@ -100,7 +133,7 @@ function barChart(i) {
     console.log(data);
 
     // Find index by id
-    var index = data.samples.findIndex(m => m.id === i);
+    var index = data.samples.findIndex(m => m.id == i);
     console.log("********** bar chart index: ", index);
     
     // Get all sample values into one array, same for OTU IDs and OTU Labels
@@ -163,7 +196,7 @@ function bubbleChart(i) {
     console.log(data);
 
     // Find index by id
-    var index = data.samples.findIndex(m => m.id === i);
+    var index = data.samples.findIndex(m => m.id == i);
     console.log("********** bubble chart index: ", index);
 
     // Get all sample values into one array, same for OTU IDs and OTU Labels
