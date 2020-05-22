@@ -20,7 +20,7 @@ Initial dashboard loaded with Subject 940 data
 
 ![](screenshots/screenshot940.png)
 
-Dashboard loaded with Subject 948 data
+Dashboard loaded with Subject 1294 data
 
-![](screenshots/screenshot948.png)
+![](screenshots/screenshot1294.png)
 
